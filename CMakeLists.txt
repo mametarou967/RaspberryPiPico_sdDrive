@@ -17,9 +17,11 @@ pico_sdk_init()
 if (TARGET tinyusb_device)
 	add_executable(RaspberryPiPico_sdDrive
 	        sdDrive.c
+			lib/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI/sd_driver/hw_config.c
 	        )
+	add_subdirectory(lib/no-OS-FatFS-SD-SPI-RPi-Pico/FatFs_SPI build)
 	
-	target_link_libraries(RaspberryPiPico_sdDrive pico_stdlib)
+	target_link_libraries(RaspberryPiPico_sdDrive pico_stdlib FatFs_SPI)
 	
 	# enable usb output, disable uart output
 	pico_enable_stdio_usb(RaspberryPiPico_sdDrive 1)
